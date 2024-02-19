@@ -28,6 +28,7 @@ export GIT_EDITOR="nvim"
 export DOTFILES=$HOME/.dotfiles
 
 export GOPATH=$HOME/.local/go
+export GOBIN=$HOME/.local/bin
 export PYENV_ROOT="$HOME/.local/pyenv"
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 export EZA_TREE_IGNORE=".git|node_modules"
@@ -80,7 +81,6 @@ prepend-path "/usr/local/bin"
 prepend-path "${brew_prefix}/bin"
 prepend-path "${brew_prefix}/sbin"
 prepend-path "${HOME}/.local/share/fnm"
-prepend-path "${GOPATH}/bin"
 prepend-path "${PYENV_ROOT}/bin"
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
