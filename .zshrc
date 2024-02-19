@@ -61,6 +61,7 @@ alias tree='eza --tree'
 if [[ ${OSTYPE} == darwin* ]]; then
   # Reset DNS cache
   alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+  alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 fi
 
 # --------------------------------------------------------------------
