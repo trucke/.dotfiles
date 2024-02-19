@@ -47,6 +47,8 @@ eval "$(fnm env)"
 # --------------------------------------------------------------------
 alias reload="source ${HOME}/.zshrc"
 alias localip="ipconfig getifaddr en0"
+alias t="tmux"
+alias n="nvim"
 # replace 'cat' with 'bat'
 # https://github.com/sharkdp/bat
 alias cat="bat"
