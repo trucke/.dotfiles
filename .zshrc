@@ -23,6 +23,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 export EDITOR='nvim'
+export VISUAL='nvim'
 export GIT_EDITOR="nvim"
 
 export DOTFILES=$HOME/.dotfiles
