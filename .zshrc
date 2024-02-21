@@ -85,7 +85,7 @@ prepend-path "/usr/local/bin"
 prepend-path "${brew_prefix}/bin"
 prepend-path "${brew_prefix}/sbin"
 prepend-path "${HOME}/.local/share/fnm"
-prepand-path ${GOBIN}
+prepend-path ${GOBIN}
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
 # Remove duplicates (preserving prepended items)
