@@ -1,13 +1,3 @@
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="robbyrussell"
-
-source $ZSH/oh-my-zsh.sh
-
-# Don't check mail when opening terminal.
-unset MAILCHECK
-
 # --------------------------------------------------------------------
 # export env variables
 # --------------------------------------------------------------------
@@ -18,9 +8,13 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
-export SHELL_SESSIONS_DISABLE=1		# disable `.zsh_sessions` to be created
+export HISTFILE="${XDG_DATA_HOME}/zsh/zsh_history" 
+export HISTTIMEFORMAT="[%F %T] "
+export SHELL_SESSIONS_DISABLE=1
 export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export ZSH="${XDG_DATA_HOME}/zsh/oh-my-zsh"
+export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
 
 export EDITOR='nvim'
 export VISUAL='nvim'
@@ -34,10 +28,17 @@ export PYENV_ROOT="$HOME/.local/pyenv"
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 export EZA_TREE_IGNORE=".git|node_modules"
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+export CONDA_DIR="${HOME}/.local"
 export CONDA_PREFIX="$HOME/.local/conda"
-export CONDA_ENVS_DIRS="$HOME/.local/conda"
  
-
+unset MAILCHECK
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+# --------------------------------------------------------------------
+# setup oh-my-zsh
+# --------------------------------------------------------------------
+ZSH_THEME="robbyrussell"
+source $ZSH/oh-my-zsh.sh
 # --------------------------------------------------------------------
 # setup cli tools
 # --------------------------------------------------------------------
@@ -68,7 +69,6 @@ if [[ ${OSTYPE} == darwin* ]]; then
   alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
   alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 fi
-
 # --------------------------------------------------------------------
 # setup PATH
 # --------------------------------------------------------------------
