@@ -60,6 +60,8 @@ alias ls="eza -s name --color auto --group-directories-first --time-style=long-i
 alias la="ls -ahl"
 # replace 'tree' with 'eza'
 alias tree='eza --tree'
+# replace 'grep' with 'ripgrep'
+alias grep='rg'
 
 if [[ ${OSTYPE} == darwin* ]]; then
   # Reset DNS cache
