@@ -20,16 +20,13 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 export GIT_EDITOR="nvim"
 
-export DOTFILES=$HOME/.dotfiles
+export DOTFILES=${HOME}/.dotfiles
 
-export GOPATH=$HOME/.local/go
-export GOBIN=$HOME/.local/bin
-export PYENV_ROOT="$HOME/.local/pyenv"
+export GOPATH=${XDG_DATA_HOME}/go
+export GOBIN=${XDG_DATA_HOME}/bin
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 export EZA_TREE_IGNORE=".git|node_modules"
-export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
-export CONDA_DIR="${HOME}/.local"
-export CONDA_PREFIX="$HOME/.local/conda"
+export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
  
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
@@ -38,7 +35,7 @@ setopt EXTENDED_HISTORY
 # setup oh-my-zsh
 # --------------------------------------------------------------------
 ZSH_THEME="robbyrussell"
-source $ZSH/oh-my-zsh.sh
+source ${ZSH}/oh-my-zsh.sh
 # --------------------------------------------------------------------
 # setup cli tools
 # --------------------------------------------------------------------
@@ -85,7 +82,7 @@ prepend-path "/usr/local/bin"
 prepend-path "${brew_prefix}/bin"
 prepend-path "${brew_prefix}/sbin"
 prepend-path "${HOME}/.local/share/fnm"
-prepend-path "${PYENV_ROOT}/bin"
+prepand-path ${GOBIN}
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
 # Remove duplicates (preserving prepended items)
