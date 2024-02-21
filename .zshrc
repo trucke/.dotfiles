@@ -34,15 +34,16 @@ export PYENV_ROOT="$HOME/.local/pyenv"
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 export EZA_TREE_IGNORE=".git|node_modules"
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
+export CONDA_PREFIX="$HOME/.local/conda"
+export CONDA_ENVS_DIRS="$HOME/.local/conda"
+ 
 
 # --------------------------------------------------------------------
 # setup cli tools
 # --------------------------------------------------------------------
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 eval "$(fnm env)"
-
+eval "$(conda "shell.$(basename "${SHELL}")" hook)"
 # --------------------------------------------------------------------
 # setup aliases
 # --------------------------------------------------------------------
