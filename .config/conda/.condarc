@@ -1,1 +1,6 @@
+envs_dirs:
+  - $HOME/.local/share/conda/envs/
+pkgs_dirs:
+  - $HOME/local/share/conda/pkgs/
+
 auto_activate_base: false
