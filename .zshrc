@@ -28,6 +28,7 @@ export GOBIN=${XDG_DATA_HOME}/bin
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 export EZA_TREE_IGNORE=".git|node_modules"
 export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
+export FNM_DIR="${XDG_DATA_HOME}/fnm"
  
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
@@ -85,7 +86,8 @@ prepend-path "/usr/local/bin"
 prepend-path "${brew_prefix}/bin"
 prepend-path "${brew_prefix}/sbin"
 prepend-path "${HOME}/.local/share/fnm"
-prepend-path ${GOBIN}
+prepend-path "${FNM_MULTISHELL_PATH}/bin"
+prepend-path "${GOBIN}"
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
 # Remove duplicates (preserving prepended items)
