@@ -33,6 +33,7 @@ export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
 export FNM_DIR="${XDG_DATA_HOME}/fnm"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
 export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
  
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
