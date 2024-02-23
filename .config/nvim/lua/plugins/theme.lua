@@ -3,7 +3,7 @@ return {
     name = 'catppuccin',
     config = function()
         require('catppuccin').setup({
-            flavour = 'macchiato',
+            flavour = 'frappe',
             transparent_background = false,
             term_colors = true,
             styles = {
