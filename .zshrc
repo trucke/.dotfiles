@@ -1,7 +1,9 @@
 # --------------------------------------------------------------------
 # export env variables
 # --------------------------------------------------------------------
-export TERM="xterm-256color"
+if [ "$TERM_PROGRAM" != "tmux" ]; then
+    export TERM="xterm-256color"
+fi
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
