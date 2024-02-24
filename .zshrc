@@ -34,6 +34,8 @@ export FNM_DIR="${XDG_DATA_HOME}/fnm"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
 export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
  
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
@@ -75,6 +77,7 @@ if [[ ${OSTYPE} == darwin* ]]; then
   alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
   alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 fi
+
 # --------------------------------------------------------------------
 # setup PATH
 # --------------------------------------------------------------------
