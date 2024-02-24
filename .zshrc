@@ -36,7 +36,9 @@ export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
- 
+export FZF_DEFAULT_OPTS='--height 50% --border'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
@@ -51,6 +53,9 @@ source ${ZSH}/oh-my-zsh.sh
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fnm env)"
 eval "$(conda "shell.$(basename "${SHELL}")" hook)"
+
+source "/usr/local/opt/fzf/shell/completion.zsh"
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 # --------------------------------------------------------------------
 # setup aliases
 # --------------------------------------------------------------------
