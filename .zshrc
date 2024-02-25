@@ -15,7 +15,6 @@ export HISTTIMEFORMAT="[%F %T] "
 export SHELL_SESSIONS_DISABLE=1
 export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export ZSH="${XDG_DATA_HOME}/zsh/oh-my-zsh"
 export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
 export LESSHISTFILE="-" # disable less history file
 
@@ -43,10 +42,9 @@ unset MAILCHECK
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 # --------------------------------------------------------------------
-# setup oh-my-zsh
+# setup starship
 # --------------------------------------------------------------------
-ZSH_THEME="robbyrussell"
-source ${ZSH}/oh-my-zsh.sh
+eval "$(starship init zsh)"
 # --------------------------------------------------------------------
 # setup cli tools
 # --------------------------------------------------------------------
@@ -59,10 +57,11 @@ source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 # --------------------------------------------------------------------
 # setup aliases
 # --------------------------------------------------------------------
-alias reload="source ${HOME}/.zshrc"
+alias reload="exec zsh"
 alias localip="ipconfig getifaddr en0"
 alias t="tmux"
 alias n="nvim"
+alias vim="nvim"
 # replace 'cat' with 'bat'
 # https://github.com/sharkdp/bat
 alias cat="bat"
