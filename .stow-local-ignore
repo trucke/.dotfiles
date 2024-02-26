@@ -29,3 +29,5 @@ _darcs
 ##########################################
 Brewfile
 macos
+install.sh
+install-remote.sh
