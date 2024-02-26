@@ -7,6 +7,18 @@ To deploy and update my dotfiles i use `stow` as my tool of choice. I can run `s
 
 ## Installation
 
+Make sure to install Homebrew first:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### Remote Installation
+```bash
+curl -fsSL https://github.com/trucke/.dotfiles/raw/main/install-remote.sh | bash
+```
+
+#### Manual Installation
+
 ```bash
 git clone https://github.com/trucke/.dotfiles $HOME/.dotfiles
 cd $HOME/.dotfiles
@@ -17,4 +29,9 @@ stow --restow .
 To configure some basic macOS privacy & security settings (powered by [privacy is sexy](https://privacy.sexy)), run:
 ```bash
 ./macos/setup.sh
+```
+
+Or run:
+```bash
+git clone https://github.com/trucke/.dotfiles $HOME/.dotfiles && ./$HOME/.dotfiles/install
 ```
