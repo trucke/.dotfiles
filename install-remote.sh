@@ -2,7 +2,7 @@
 
 SOURCE="https://github.com/trucke/.dotfiles"
 TARBALL="$SOURCE/tarball/master"
-TARGET="$HOME/.testme-install-dotfiles"
+TARGET="$HOME/.dotfiles"
 TAR_CMD="tar -xz -C "$TARGET" --strip-components=1"
 
 is_executable() {
@@ -23,4 +23,5 @@ else
   echo "Installing dotfiles..."
   mkdir -p "$TARGET"
   eval "$CMD"
+  $(builtin cd "${TARGET}" && ./install)
 fi
