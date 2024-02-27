@@ -20,8 +20,8 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                 ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                ["<C-Space>"] = cmp.mapping.complete({}),
-                ['<CR>'] = cmp.mapping.confirm({
+                ['<C-Space>'] = cmp.mapping.complete({}),
+                ['<C-y>'] = cmp.mapping.confirm({
                     -- behavior = cmp.ConfirmBehavior.Replace,
                     select = true
                 }),
