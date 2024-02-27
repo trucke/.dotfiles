@@ -33,7 +33,10 @@ local servers = {
         Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
-            diagnostics = { globals = { 'vim' } }
+            diagnostics = { globals = { 'vim' } },
+            completion = {
+                callSnippet = 'Replace'
+            }
         },
     },
 }
@@ -48,9 +51,11 @@ return {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'j-hui/fidget.nvim',
+        "folke/neodev.nvim",
     },
     config = function()
         require('fidget').setup({})
+        require('neodev').setup({})
         require('mason').setup()
         require('mason-lspconfig').setup({
             ensure_installed = vim.tbl_keys(servers),
