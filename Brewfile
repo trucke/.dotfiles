@@ -31,7 +31,7 @@ cask "iina"
 cask "obsidian"
 cask "protonvpn"
 cask "raycast"
-# cask "rectangle"
+cask "rectangle-pro"
 cask "signal"
 cask "yubico-yubikey-manager"           
 
