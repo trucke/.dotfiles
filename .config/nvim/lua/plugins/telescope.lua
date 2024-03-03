@@ -21,5 +21,8 @@ return {
         vim.keymap.set('n', '<leader>sgf', builtin.git_files, { desc = '[S]earch [G]it [F]iles' })
         vim.keymap.set('n', '<leader>ss', builtin.live_grep, { desc = '[S]earch [S]tring by grep' })
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+        vim.keymap.set('n', '<leader>sn', function()
+            builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        end, { desc = '[S]earch [N]eovim config files' })
     end
 }

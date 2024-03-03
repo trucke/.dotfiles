@@ -4,6 +4,8 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 -- print the line number in front of each line
 vim.opt.number = true
+-- Don't show the mode, since it's already in status line
+vim.opt.showmode = false
 -- show relative line number in front of each line
 vim.opt.relativenumber = true
 -- minimum nr. of lines above and below cursor
@@ -26,6 +28,9 @@ vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 250
 -- time in milliseconds to wait for a mapped sequence to complete
 vim.opt.timeoutlen = 500
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 -- set completeopt to have a better completion experience
 vim.opt.completeopt = 'menuone,noselect'
 -- save undo information in a file
