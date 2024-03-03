@@ -16,6 +16,7 @@ export SHELL_SESSIONS_DISABLE=1
 export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
+export LESS="FIRSX"
 export LESSHISTFILE="-" # disable less history file
 
 export EDITOR='nvim'
