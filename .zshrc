@@ -49,7 +49,6 @@ eval "$(starship init zsh)"
 # --------------------------------------------------------------------
 # setup cli tools
 # --------------------------------------------------------------------
-eval "$(zoxide init --cmd cd zsh)"
 eval "$(fnm env)"
 eval "$(conda "shell.$(basename "${SHELL}")" hook)"
 
@@ -82,6 +81,9 @@ if [[ ${OSTYPE} == darwin* ]]; then
   alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
   alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
 fi
+
+alias dot="cd ~/.dotfiles"
+alias projects="cd ~/Development/projects"
 
 # --------------------------------------------------------------------
 # setup PATH
