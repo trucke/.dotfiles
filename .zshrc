@@ -62,6 +62,9 @@ alias localip="ipconfig getifaddr en0"
 alias t="tmux"
 alias n="nvim"
 alias vim="nvim"
+alias dot="cd ~/.dotfiles"
+alias projects="cd ~/Development/projects"
+alias edithosts="sudo nvim /etc/hosts"
 # replace 'cat' with 'bat'
 # https://github.com/sharkdp/bat
 alias cat="bat"
@@ -80,11 +83,11 @@ if [[ ${OSTYPE} == darwin* ]]; then
   # Reset DNS cache
   alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
   alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
+  alias brewupdate="brew update && brew upgrade && brew cleanup"
+  alias brewclean="brew cleanup --prune=all"
+  alias obsidian="cd ~/Documents/Obsidian/Mimir"
+  alias syncvault="rclone sync -L --exclude .DS_Store --exclude '.git/**' --exclude .gitignore --delete-excluded ~/Documents/Obsidian/Mimir ~/.obsidian-remote/Mimir"
 fi
-
-alias dot="cd ~/.dotfiles"
-alias projects="cd ~/Development/projects"
-
 # --------------------------------------------------------------------
 # setup PATH
 # --------------------------------------------------------------------
