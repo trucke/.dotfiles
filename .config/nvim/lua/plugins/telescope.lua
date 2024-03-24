@@ -4,7 +4,8 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope-ui-select.nvim',
-        'nvim-tree/nvim-web-devicons'
+        'nvim-tree/nvim-web-devicons',
+        "debugloop/telescope-undo.nvim",
     },
     config = function()
         require('telescope').setup({
@@ -14,7 +15,9 @@ return {
                 },
             },
         })
+
         require('telescope').load_extension('ui-select')
+        require('telescope').load_extension('undo')
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
