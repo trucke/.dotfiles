@@ -16,6 +16,7 @@ export SHELL_SESSIONS_DISABLE=1
 export HOMEBREW_NO_ANALYTICS=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
+export ZSH_SESSION_DIR="${XDG_DATA_HOME}/zsh/zsh_sessions"
 export LESS="FIRSX"
 export LESSHISTFILE="-" # disable less history file
 
@@ -42,6 +43,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
+# --------------------------------------------------------------------
+# setup zsh autocompletion
+# --------------------------------------------------------------------
+autoload -Uz compinit && compinit -d "${ZSH_COMPDUMP}"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # --------------------------------------------------------------------
 # setup starship
 # --------------------------------------------------------------------
