@@ -18,9 +18,9 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
 
-    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float(), { desc = 'Open diagnostics' })
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_next(), { desc = 'Goto next diagnostics' })
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev(), { desc = 'Goto prev diagnostics' })
+    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { desc = 'Open diagnostics' })
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { desc = 'Goto next diagnostics' })
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { desc = 'Goto prev diagnostics' })
 end
 
 local servers = {
