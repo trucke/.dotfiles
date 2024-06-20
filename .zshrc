@@ -70,7 +70,13 @@ alias n="nvim"
 alias vim="nvim"
 alias dot="cd ~/.dotfiles"
 alias projects="cd ~/Development/projects"
+alias homelab="cd ~/Development/projects/homelab"
+function lab() {
+    [[ -n "$1" ]] && cd "${HOME}/Development/projects/homelab/${1}" || homelab
+}
+
 alias edithosts="sudo nvim /etc/hosts"
+alias editssh="nvim ~/.ssh/config"
 # replace 'cat' with 'bat'
 # https://github.com/sharkdp/bat
 alias cat="bat"
