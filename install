@@ -11,4 +11,4 @@ popd
 
 mkir -p "${HOME}/development/projects"
 mkir -p "${HOME}/development/tools"
-
+git clone https://github.com/tmux-plugins/tpm "${HOME}/.local/share/tmux/plugins/tpm"
