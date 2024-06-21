@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+mkdir "${HOME}/.config"
+
 pushd "${HOME}/.dotfiles"
-
 brew bundle --file "./Brewfile" --no-lock
-stow --restow .
+stow --restow --target="${HOME}/.config" .config
+stow --restow zsh
 bash "./macos/setup.sh"
-
 popd
+
+mkir -p "${HOME}/development/projects"
+mkir -p "${HOME}/development/tools"
 
