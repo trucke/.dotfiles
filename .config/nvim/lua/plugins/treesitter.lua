@@ -1,18 +1,16 @@
-return {
+return { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    config = function()
-        require('nvim-treesitter.configs').setup({
-            -- A list of parser names, or "all"
-            ensure_installed = { 'lua', 'vimdoc', 'go', 'rust', 'bash', 'python', 'javascript' },
-            -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = false,
-            -- Automatically install missing parsers when entering buffer
-            -- Recommendation: set to false if you don"t have `tree-sitter` CLI installed locally
-            auto_install = true,
-
-            indent = { enable = true },
-            highlight = { enable = true },
-        })
+    opts = {
+        ensure_installed = { 'bash', 'go', 'sql', 'python', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+        auto_install = true,
+        highlight = { enable = true },
+        indent = { enable = true },
+    },
+    config = function(_, opts)
+        -- Prefer git instead of curl in order to improve connectivity in some environments
+        require('nvim-treesitter.install').prefer_git = true
+        ---@diagnostic disable-next-line: missing-fields
+        require('nvim-treesitter.configs').setup(opts)
     end
 }

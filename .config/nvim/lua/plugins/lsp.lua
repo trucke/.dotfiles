@@ -1,91 +1,103 @@
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-    -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-    end, { desc = 'Format current buffer with LSP' })
-
-    local t = require('telescope.builtin')
-    vim.keymap.set('n', 'gd', t.lsp_definitions, { desc = '[G]oto [D]efinition' })
-    vim.keymap.set('n', 'gr', t.lsp_references, { desc = '[G]oto [R]ferences' })
-    vim.keymap.set('n', 'gI', t.lsp_implementations, { desc = '[G]oto [I]mplementation' })
-    vim.keymap.set('n', '<leader>ws', t.lsp_dynamic_workspace_symbols, { desc = '[W]orkplace [S]ymbols' })
-    vim.keymap.set('n', '<leader>td', t.lsp_type_definitions, { desc = '[T]ype [D]efinition' })
-
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Documentation' })
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' })
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
-
-    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { desc = 'Open diagnostics' })
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { desc = 'Goto next diagnostics' })
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { desc = 'Goto prev diagnostics' })
-end
-
-local servers = {
-    gopls = {},
-    rust_analyzer = {},
-    tsserver = {},
-    pyright = {},
-
-    lua_ls = {
-        Lua = {
-            runtime = { version = 'LuaJIT' },
-            workspace = { checkThirdParty = false },
-            library = {
-                '${3rd}/luv/library',
-                unpack(vim.api.nvim_get_runtime_file('', true)),
-            },
-            telemetry = { enable = false },
-            diagnostics = { globals = { 'vim' } },
-            completion = {
-                callSnippet = 'Replace'
-            }
-        },
-    },
-}
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-return {
+return { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
-        'williamboman/mason.nvim',
+        { 'williamboman/mason.nvim', config = true },
         'williamboman/mason-lspconfig.nvim',
-        'j-hui/fidget.nvim',
-        "folke/neodev.nvim",
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        { 'j-hui/fidget.nvim', opts = {} },
+        { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
-        require('fidget').setup({})
-        require('neodev').setup({})
-        require('mason').setup()
-        require('mason-lspconfig').setup({
-            ensure_installed = vim.tbl_keys(servers),
-            handlers = {
-                function(server_name)
-                    require('lspconfig')[server_name].setup {
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        settings = servers[server_name],
-                        filetypes = (servers[server_name] or {}).filetypes,
-                    }
-                end,
-            },
+        vim.api.nvim_create_autocmd('LspAttach', {
+            group = vim.api.nvim_create_augroup('dev-lsp-attach', { clear = true }),
+            callback = function(event)
+                local map = function(keys, func, desc)
+                    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                end
+
+                map('<leader>f', vim.lsp.buf.format, '[F]ormat the current buffer')
+                --  To jump back, press <C-t>.
+                map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+                map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+                map('gtd', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype [D]efinition')
+                map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+                map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+                map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+                -- Execute a code action, usually your cursor needs to be on top of an error
+                -- or a suggestion from your LSP for this to activate.
+                map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+                map('K', vim.lsp.buf.hover, 'Hover Documentation')
+                -- WARN: This is not Goto Definition, this is Goto Declaration.
+                --  For example, in C this would take you to the header.
+                map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+            end,
         })
 
-        vim.diagnostic.config({
-            -- update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+        local servers = {
+            -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
+            bashls = {},
+            gopls = {},
+            -- ansiblels = {},
+            -- astro = {},
+            -- docker_compose_language_server = {},
+            -- dockerls = {},
+            -- csharp_ls = {},
+            -- omnisharp = {},
+            -- css_variables = {},
+            -- cssls = {},
+            -- gleam = {},
+            -- html = {},
+            -- htmx = {},
+            -- gradle = {},
+            -- jsonls = {},
+            -- kotlin_language_server = {},
+            -- markdown_oxide = {},
+            -- metals = {}, -- scala language server
+            -- pyright = {},
+            -- rust_analyzer = {},
+            -- tsserver = {},
+            -- sqls = {},
+            -- svelte = {},
+            -- tailwindcss = {},
+            -- templ = {},
+            -- yamlls = {},
+            -- zls = {},
+
+            lua_ls = {
+                -- cmd = {...},
+                -- filetypes = { ...},
+                -- capabilities = {},
+                settings = {
+                    Lua = {
+                        completion = {
+                            callSnippet = 'Replace',
+                        },
+                        telemetry = { enable = false },
+                        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                        -- diagnostics = { disable = { 'missing-fields' } },
+                    },
+                },
             },
+        }
+
+        require('mason').setup()
+        local ensure_installed = vim.tbl_keys(servers or {})
+        vim.list_extend(ensure_installed, {
+            'stylua', -- Used to format Lua code
         })
-    end
+        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+        require('mason-lspconfig').setup {
+            handlers = {
+                function(server_name)
+                    local server = servers[server_name] or {}
+                    server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+                    require('lspconfig')[server_name].setup(server)
+                end,
+            },
+        }
+    end,
 }
