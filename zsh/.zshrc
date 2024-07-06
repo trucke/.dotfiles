@@ -48,18 +48,15 @@ setopt EXTENDED_HISTORY
 # --------------------------------------------------------------------
 autoload -Uz compinit && compinit -d "${ZSH_COMPDUMP}"
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# --------------------------------------------------------------------
-# setup starship
-# --------------------------------------------------------------------
-eval "$(starship init zsh)"
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # --------------------------------------------------------------------
 # setup cli tools
 # --------------------------------------------------------------------
+eval "$(starship init zsh)"
 eval "$(fnm env)"
 eval "$(conda "shell.$(basename "${SHELL}")" hook)"
-
-source "/usr/local/opt/fzf/shell/completion.zsh"
-source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+source <(fzf --zsh)
 # --------------------------------------------------------------------
 # setup aliases
 # --------------------------------------------------------------------
@@ -79,7 +76,7 @@ alias edithosts="sudo nvim /etc/hosts"
 alias editssh="nvim ~/.ssh/config"
 # replace 'cat' with 'bat'
 # https://github.com/sharkdp/bat
-alias cat="bat"
+alias cat="bat -pp"
 # replace 'ls' with 'eza' (maintained fork of 'exa')
 # https://github.com/eza-community/eza (https://github.com/ogham/exa)
 unalias "ls" &> /dev/null
