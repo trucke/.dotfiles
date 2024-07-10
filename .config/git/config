@@ -1,5 +1,32 @@
 [user]
 	email = kt.code@pm.me
 	name = trucke
+
 [init]
 	defaultBranch = main
+
+[core]
+    editor = nvim
+    pager = delta
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
+
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+
+[push]
+    default = current
+
+[diff]
+    colorMoved = default
+
+[delta]
+    true-color = always
+    syntax-theme = Catppuccin Mocha
+
+[interactive]
+    diffFilter = delta --color-only
