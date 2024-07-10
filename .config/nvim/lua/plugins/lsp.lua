@@ -41,6 +41,7 @@ return { -- LSP Configuration & Plugins
             -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
             bashls = {},
             gopls = {},
+            tsserver = {},
             -- ansiblels = {},
             -- astro = {},
             -- docker_compose_language_server = {},
@@ -59,7 +60,6 @@ return { -- LSP Configuration & Plugins
             -- metals = {}, -- scala language server
             -- pyright = {},
             -- rust_analyzer = {},
-            -- tsserver = {},
             -- sqls = {},
             -- svelte = {},
             -- tailwindcss = {},
