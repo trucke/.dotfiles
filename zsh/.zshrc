@@ -40,6 +40,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 export FZF_DEFAULT_OPTS='--height 50% --border'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+export BAT_THEME="Catppuccin Mocha"
+
 unset MAILCHECK
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
