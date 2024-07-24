@@ -26,7 +26,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 
 -- [[ Additional Keymaps ]]
-vim.keymap.set('n', '<leader>ex', vim.cmd.Ex, { desc = 'Open netrw' })
+-- vim.keymap.set('n', '<leader>ex', vim.cmd.Ex, { desc = 'Open netrw' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move current line up' })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Move current line down' })
 

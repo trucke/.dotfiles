@@ -4,8 +4,8 @@ return { -- LSP Configuration & Plugins
         { 'williamboman/mason.nvim', config = true },
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
-        { 'j-hui/fidget.nvim', opts = {} },
-        { 'folke/neodev.nvim', opts = {} },
+        { 'j-hui/fidget.nvim',       opts = {} },
+        { 'folke/neodev.nvim',       opts = {} },
     },
     config = function()
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -42,9 +42,15 @@ return { -- LSP Configuration & Plugins
             bashls = {},
             gopls = {},
             tsserver = {},
+            yamlls = {
+                settings = {
+                    yaml = {
+                        customTags = { "!env_var scalar" },
+                    }
+                }
+            },
             -- ansiblels = {},
             -- astro = {},
-            -- docker_compose_language_server = {},
             -- dockerls = {},
             -- csharp_ls = {},
             -- omnisharp = {},
@@ -64,7 +70,6 @@ return { -- LSP Configuration & Plugins
             -- svelte = {},
             -- tailwindcss = {},
             -- templ = {},
-            -- yamlls = {},
             -- zls = {},
 
             lua_ls = {
