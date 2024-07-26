@@ -89,6 +89,15 @@ alias la="ls -ahl"
 alias tree='eza --tree'
 # replace 'grep' with 'ripgrep'
 alias grep='rg'
+# git aliases
+alias gla='git --no-pager log --oneline --decorate --graph --all'
+alias gl='git --no-pager log --oneline --decorate --graph'
+alias gll="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gsw='git switch'
+alias gs='git status'
+alias gb='git branch'
+alias ga='git add'
+alias gc='git commit'
 
 if [[ ${OSTYPE} == darwin* ]]; then
   # Reset DNS cache
