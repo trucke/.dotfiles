@@ -5,7 +5,12 @@ vim.opt.relativenumber = true
 -- Don't show the mode, since it's already in status line
 vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
-vim.opt.clipboard = 'unnamedplus'
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
 -- Save undo history
 vim.opt.undofile = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
