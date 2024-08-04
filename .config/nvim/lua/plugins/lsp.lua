@@ -51,6 +51,8 @@ return { -- LSP Configuration & Plugins
                     }
                 }
             },
+            templ = {},
+
             -- ansiblels = {},
             -- astro = {},
             -- dockerls = {},
@@ -71,7 +73,6 @@ return { -- LSP Configuration & Plugins
             -- sqls = {},
             -- svelte = {},
             -- tailwindcss = {},
-            -- templ = {},
             -- zls = {},
 
             lua_ls = {
