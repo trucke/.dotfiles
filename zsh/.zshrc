@@ -99,6 +99,8 @@ alias gb='git branch'
 alias ga='git add'
 alias gc='git commit'
 
+function gi() { curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" ;}
+
 if [[ ${OSTYPE} == darwin* ]]; then
   # Reset DNS cache
   alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
