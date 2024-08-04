@@ -42,6 +42,7 @@ return { -- LSP Configuration & Plugins
         local servers = {
             -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
             bashls = {},
+            htmx = {},
             gopls = {},
             tsserver = {},
             yamlls = {
@@ -51,6 +52,9 @@ return { -- LSP Configuration & Plugins
                     }
                 }
             },
+            templ = {},
+            tailwindcss = {},
+
             -- ansiblels = {},
             -- astro = {},
             -- dockerls = {},
@@ -60,7 +64,6 @@ return { -- LSP Configuration & Plugins
             -- cssls = {},
             -- gleam = {},
             -- html = {},
-            -- htmx = {},
             -- gradle = {},
             -- jsonls = {},
             -- kotlin_language_server = {},
@@ -70,8 +73,6 @@ return { -- LSP Configuration & Plugins
             -- rust_analyzer = {},
             -- sqls = {},
             -- svelte = {},
-            -- tailwindcss = {},
-            -- templ = {},
             -- zls = {},
 
             lua_ls = {
