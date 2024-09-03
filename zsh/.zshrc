@@ -90,14 +90,16 @@ alias tree='eza --tree'
 # replace 'grep' with 'ripgrep'
 alias grep='rg'
 # git aliases
-alias gla='git --no-pager log --oneline --decorate --graph --all'
-alias gl='git --no-pager log --oneline --decorate --graph'
-alias gll="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --all"
 alias gsw='git switch'
 alias gs='git status'
 alias gb='git branch'
 alias ga='git add'
 alias gc='git commit'
+alias gr="git pull --rebase origin"
+# tailwindcss
+alias tw='tailwindcss'
+alias aiders='conda activate aider && aider --sonnet --env-file ~/development/tools/aider/env'
 
 function gi() { curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" ;}
 
