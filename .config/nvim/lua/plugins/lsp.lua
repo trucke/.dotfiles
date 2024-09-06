@@ -54,6 +54,7 @@ return { -- LSP Configuration & Plugins
             },
             templ = {},
             tailwindcss = {},
+            elixirls = {},
 
             -- ansiblels = {},
             -- astro = {},
