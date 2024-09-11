@@ -44,7 +44,7 @@ return { -- LSP Configuration & Plugins
             bashls = {},
             htmx = {},
             gopls = {},
-            tsserver = {},
+            ts_ls = {},
             yamlls = {
                 settings = {
                     yaml = {
