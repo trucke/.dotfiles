@@ -3,7 +3,7 @@
 palette = "catppuccin_mocha"
 
 [battery]
-disabled = false
+disabled = true
 
 [character]
 success_symbol = "[❯](peach)"
