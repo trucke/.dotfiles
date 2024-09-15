@@ -1,119 +1,144 @@
-# --------------------------------------------------------------------
-# export env variables
-# --------------------------------------------------------------------
-if [ "$TERM_PROGRAM" != "tmux" ]; then
-    export TERM="xterm-256color"
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+# --------------------------------------------------------------------
+# Environment variables
+# --------------------------------------------------------------------
+# if [ "$TERM_PROGRAM" != "tmux" ]; then
+#     export TERM="xterm-256color"
+# fi
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
-export HISTFILE="${XDG_DATA_HOME}/zsh/zsh_history" 
-export HISTTIMEFORMAT="[%F %T] "
-export SHELL_SESSIONS_DISABLE=1
 export HOMEBREW_NO_ANALYTICS=1
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
-export ZSH_SESSION_DIR="${XDG_DATA_HOME}/zsh/zsh_sessions"
-export LESS="FIRSX"
-export LESSHISTFILE="-" # disable less history file
+export SHELL_SESSIONS_DISABLE=1
 
-export EDITOR='nvim'
-export VISUAL='nvim'
+export LESSHISTFILE="-" # disable less history file
+export LESS="FIRSX"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export GIT_EDITOR="nvim"
+
+export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
+export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
+export FNM_DIR="${XDG_DATA_HOME}/fnm"
+
+export GOPATH="${XDG_DATA_HOME}/go"
+export GOBIN="${XDG_DATA_HOME}/bin"
+export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
+export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
+export MIX_HOME="$XDG_DATA_HOME/mix"
+export HEX_HOME="$XDG_DATA_HOME/hex"
+export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
+
+export BAT_THEME="Catppuccin Mocha"
+export EZA_TREE_IGNORE=".git|node_modules"
+
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+export FZF_DEFAULT_OPTS="--height 50% --border"
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 
 export DOTFILES=${HOME}/.dotfiles
 
-export GOPATH=${XDG_DATA_HOME}/go
-export GOBIN=${XDG_DATA_HOME}/bin
-export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
-export EZA_TREE_IGNORE=".git|node_modules"
-export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
-export FNM_DIR="${XDG_DATA_HOME}/fnm"
-export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
-export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
-export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
-
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
-export FZF_DEFAULT_OPTS='--height 50% --border'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-export BAT_THEME="Catppuccin Mocha"
-
 unset MAILCHECK
-setopt INC_APPEND_HISTORY
-setopt EXTENDED_HISTORY
 # --------------------------------------------------------------------
-# setup zsh autocompletion
+# Download Zinit, if it's not there yet
 # --------------------------------------------------------------------
-autoload -Uz compinit && compinit -d "${ZSH_COMPDUMP}"
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
 # --------------------------------------------------------------------
-# setup cli tools
+# Add in zsh plugins
+# --------------------------------------------------------------------
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+#zinit light zsh-users/zsh-autosuggestions
+
+# --------------------------------------------------------------------
+# Add in snippets
+# --------------------------------------------------------------------
+zinit snippet OMZP::aliases
+zinit snippet OMZP::brew
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::command-not-found
+
+zstyle ":omz:plugins:eza" "dirs-first" yes
+zstyle ":omz:plugins:eza" "header" yes
+zstyle ":omz:plugins:eza" "size-prefix" binary
+zstyle ":omz:plugins:eza" "time-style" long-iso
+zinit snippet OMZP::eza
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+# --------------------------------------------------------------------
+# History
+# --------------------------------------------------------------------
+HISTSIZE=5000
+HISTFILE="${XDG_DATA_HOME}/zsh/zsh_history"
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# --------------------------------------------------------------------
+# Completion styling
+# --------------------------------------------------------------------
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
+zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+zstyle ":completion:*" menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+# --------------------------------------------------------------------
+# Shell integrations
 # --------------------------------------------------------------------
 eval "$(starship init zsh)"
 eval "$(fnm env)"
 eval "$(conda "shell.$(basename "${SHELL}")" hook)"
-source <(fzf --zsh)
+eval "$(fzf --zsh)"
+
+bindkey -s ^f "tmux-sessionizer\n"
 # --------------------------------------------------------------------
-# setup aliases
+# Setup aliases
 # --------------------------------------------------------------------
+alias dot="cd ${HOME}/.dotfiles"
+alias tw="tailwindcss"
+alias aiders="conda activate aider && aider --sonnet --env-file ${HOME}/development/tools/aider/env"
+alias localip="ip address | grep -o \"inet 192.*/\" | awk '{ print \$2 }' | tr / ' ' | xargs"
+alias dev="cd ${HOME}/development/"
+alias gll='git log --graph --all --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short -n 20'
+
 alias reload="exec zsh"
-alias localip="ipconfig getifaddr en0"
-alias t="tmux"
-alias n="nvim"
-alias vim="nvim"
-alias dot="cd ~/.dotfiles"
-alias projects="cd ~/Development/projects"
-alias homelab="cd ~/Development/projects/homelab"
-function lab() {
-    [[ -n "$1" ]] && cd "${HOME}/Development/projects/homelab/${1}" || homelab
-}
-
 alias edithosts="sudo nvim /etc/hosts"
-alias editssh="nvim ~/.ssh/config"
-# replace 'cat' with 'bat'
-# https://github.com/sharkdp/bat
+alias editssh="nvim ${HOME}/.ssh/config"
+
 alias cat="bat -pp"
-# replace 'ls' with 'eza' (maintained fork of 'exa')
-# https://github.com/eza-community/eza (https://github.com/ogham/exa)
-unalias "ls" &> /dev/null
-unalias "la" &> /dev/null
-alias ls="eza -s name --color auto --group-directories-first --time-style=long-iso"
-alias la="ls -ahl"
-# replace 'tree' with 'eza'
-alias tree='eza --tree'
-# replace 'grep' with 'ripgrep'
-alias grep='rg'
-# git aliases
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --all"
-alias gsw='git switch'
-alias gs='git status'
-alias gb='git branch'
-alias ga='git add'
-alias gc='git commit'
-alias gr="git pull --rebase origin"
-# tailwindcss
-alias tw='tailwindcss'
-alias aiders='conda activate aider && aider --sonnet --env-file ~/development/tools/aider/env'
+alias grep="rg"
+alias vim="nvim"
 
-function gi() { curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" ;}
-
-if [[ ${OSTYPE} == darwin* ]]; then
-  # Reset DNS cache
-  alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
-  alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs"
-  alias brewupdate="brew update && brew upgrade && brew cleanup"
-  alias brewclean="brew cleanup --prune=all"
-  alias obsidian="cd ~/Documents/Obsidian/Mimir"
-  alias syncvault="rclone sync -L --exclude .DS_Store --exclude '.git/**' --exclude .gitignore --delete-excluded ~/Documents/Obsidian/Mimir ~/.obsidian-remote/Mimir"
-fi
 # --------------------------------------------------------------------
-# setup PATH
+# Setup PATH
 # --------------------------------------------------------------------
 function prepend-path() {
   [[ -d "$1" ]] && PATH="$1:${PATH}"
@@ -133,6 +158,7 @@ prepend-path "${CARGO_HOME}/bin"
 prepend-path "${GOBIN}"
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
+prepend-path "${HOME}/.local/scripts"
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
 PATH=$(echo -n "${PATH}" | awk -v RS=: '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}')
