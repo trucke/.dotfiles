@@ -5,6 +5,7 @@ mkdir "${HOME}/.config"
 pushd "${HOME}/.dotfiles"
 brew bundle --file "./Brewfile" --no-lock
 stow --restow --target="${HOME}/.config" .config
+stow --restow --target="${HOME}/.local" .local
 stow --restow zsh
 bash "./macos/setup.sh"
 popd
