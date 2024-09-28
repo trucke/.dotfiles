@@ -16,7 +16,7 @@ dynamic_title = true
 family = "JetBrainsMono Nerd Font"
 
 [font]
-size = 13
+size = 16
 
 [mouse]
 hide_when_typing = true
