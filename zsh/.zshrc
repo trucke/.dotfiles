@@ -123,6 +123,7 @@ bindkey -s ^f "tmux-sessionizer\n"
 # Setup aliases
 # --------------------------------------------------------------------
 alias dot="cd ${HOME}/.dotfiles"
+alias dev="cd ${HOME}/development"
 alias tw="tailwindcss"
 alias aiders="conda activate aider && aider --sonnet --env-file ${HOME}/development/tools/aider/env"
 alias localip="ip address | grep -o \"inet 192.*/\" | awk '{ print \$2 }' | tr / ' ' | xargs"
@@ -136,6 +137,11 @@ alias editssh="nvim ${HOME}/.ssh/config"
 alias cat="bat -pp"
 alias grep="rg"
 alias vim="nvim"
+
+if [[ $(uname) == "Darwin" ]]; then
+    alias localip="ipconfig getifaddr en0"
+    alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+fi
 
 # --------------------------------------------------------------------
 # Setup PATH
