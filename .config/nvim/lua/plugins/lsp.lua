@@ -45,16 +45,18 @@ return { -- LSP Configuration & Plugins
             htmx = {},
             gopls = {},
             ts_ls = {},
-            yamlls = {
-                settings = {
-                    yaml = {
-                        customTags = { "!env_var scalar" },
-                    }
-                }
-            },
-            templ = {},
+            -- yamlls = {
+            --     settings = {
+            --         yaml = {
+            --             customTags = { "!env_var scalar" },
+            --         }
+            --     }
+            -- },
+            -- templ = {},
             tailwindcss = {},
-            elixirls = {},
+            lexical = {},
+            svelte = {},
+            -- elixirls = {},
 
             -- ansiblels = {},
             -- astro = {},
@@ -73,7 +75,6 @@ return { -- LSP Configuration & Plugins
             -- pyright = {},
             -- rust_analyzer = {},
             -- sqls = {},
-            -- svelte = {},
             -- zls = {},
 
             lua_ls = {
