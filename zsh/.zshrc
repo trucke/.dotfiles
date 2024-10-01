@@ -124,11 +124,13 @@ bindkey -s ^f "tmux-sessionizer\n"
 # --------------------------------------------------------------------
 alias dot="cd ${HOME}/.dotfiles"
 alias dev="cd ${HOME}/development"
+alias t="tmux"
+alias c="conda"
 alias tw="tailwindcss"
-alias aiders="conda activate aider && aider --sonnet --env-file ${HOME}/development/tools/aider/env"
+alias aiders="conda activate aider && aider --sonnet --env-file ${HOME}/development/_tools/aider/env"
 alias localip="ip address | grep -o \"inet 192.*/\" | awk '{ print \$2 }' | tr / ' ' | xargs"
 alias dev="cd ${HOME}/development/"
-alias gll='git log --graph --all --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short -n 20'
+alias gll='git log --graph --all --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad)" --date=relative -n 20'
 
 alias reload="exec zsh"
 alias edithosts="sudo nvim /etc/hosts"
