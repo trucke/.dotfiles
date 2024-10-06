@@ -37,11 +37,14 @@ export HEX_HOME="$XDG_DATA_HOME/hex"
 export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
 
 export BAT_THEME="Catppuccin Mocha"
-export EZA_TREE_IGNORE=".git|node_modules"
 
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
-export FZF_DEFAULT_OPTS="--height 50% --border"
+export EZA_TREE_IGNORE=".git|node_modules"
+export EZA_ICONS_AUTO=1
+
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules"
+export FZF_DEFAULT_OPTS="--height ~35% --tmux 80%,50% --cycle --tac --no-unicode --info=right --highlight-line"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+export FZF_COMPLETION_TRIGGER='::'
 
 export DOTFILES=${HOME}/.dotfiles
 
@@ -63,7 +66,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 # --------------------------------------------------------------------
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
-#zinit light zsh-users/zsh-autosuggestions
 
 # --------------------------------------------------------------------
 # Add in snippets
@@ -118,7 +120,11 @@ eval "$(fnm env)"
 eval "$(conda "shell.$(basename "${SHELL}")" hook)"
 eval "$(fzf --zsh)"
 
+# --------------------------------------------------------------------
+# Custom keybindings
+# --------------------------------------------------------------------
 bindkey -s ^f "tmux-sessionizer\n"
+
 # --------------------------------------------------------------------
 # Setup aliases
 # --------------------------------------------------------------------
@@ -126,13 +132,18 @@ alias dot="cd ${HOME}/.dotfiles"
 alias dev="cd ${HOME}/development"
 alias t="tmux"
 alias c="conda"
+alias f="fzf"
 alias tw="tailwindcss"
 alias aiders="conda activate aider && aider --sonnet --env-file ${HOME}/development/_tools/aider/env"
 alias localip="ip address | grep -o \"inet 192.*/\" | awk '{ print \$2 }' | tr / ' ' | xargs"
 alias dev="cd ${HOME}/development/"
 alias gll='git log --graph --all --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad)" --date=relative -n 20'
 
-alias reload="exec zsh"
+alias lt="eza --tree --level=2 --icons --git"
+alias llt="eza --tree --level=2 --long --icons --git"
+alias lat="eza --tree --icons"
+
+alias src="exec zsh"
 alias edithosts="sudo nvim /etc/hosts"
 alias editssh="nvim ${HOME}/.ssh/config"
 
