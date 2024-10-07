@@ -1,14 +1,13 @@
-return { -- Highlight, edit, and navigate code
+return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    main = 'nvim-treesitter.configs',
     opts = {
-        ensure_installed = { 'bash', 'go', 'templ', 'sql', 'python', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'javascript' },
+        ensure_installed = { 'lua', 'luadoc', 'vim', 'vimdoc', 'bash', 'go', 'diff',
+            'html', 'javascript', 'markdown', 'markdown_inline', "elixir", "heex" },
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },
+        markdown = { enable = true },
     },
-    config = function(_, opts)
-        ---@diagnostic disable-next-line: missing-fields
-        require('nvim-treesitter.configs').setup(opts)
-    end
 }
