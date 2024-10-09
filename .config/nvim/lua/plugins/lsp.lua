@@ -1,7 +1,6 @@
 -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 local servers = {
     bashls = {},
-    htmx = {},
     gopls = {},
     ts_ls = {},
     tailwindcss = {},
