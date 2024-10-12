@@ -27,9 +27,12 @@ export GIT_EDITOR="nvim"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 export RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/.ripgreprc"
 export FNM_DIR="${XDG_DATA_HOME}/fnm"
+export TMS_CONFIG_FILE="${XDG_CONFIG_HOME}/tms/config.toml"
+
+export GOBIN="${XDG_DATA_HOME}/bin"
+export CARGO_INSTALL_ROOT="${XDG_DATA_HOME}"
 
 export GOPATH="${XDG_DATA_HOME}/go"
-export GOBIN="${XDG_DATA_HOME}/bin"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rust/rustup"
 export CARGO_HOME="${XDG_DATA_HOME}/rust/cargo"
 export MIX_HOME="$XDG_DATA_HOME/mix"
@@ -73,7 +76,6 @@ zinit light zsh-users/zsh-completions
 zinit snippet OMZP::aliases
 zinit snippet OMZP::brew
 zinit snippet OMZP::git
-zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
 zstyle ":omz:plugins:eza" "dirs-first" yes
@@ -174,7 +176,7 @@ prepend-path "${brew_prefix}/sbin"
 prepend-path "${HOME}/.local/share/fnm"
 prepend-path "${FNM_MULTISHELL_PATH}/bin"
 prepend-path "${CARGO_HOME}/bin"
-prepend-path "${GOBIN}"
+prepend-path "${XDG_DATA_HOME}/bin"
 prepend-path "/sbin"
 prepend-path "/usr/sbin"
 prepend-path "${HOME}/.local/scripts"
@@ -184,3 +186,10 @@ PATH=$(echo -n "${PATH}" | awk -v RS=: '{ if (!arr[$0]++) {printf("%s%s",!ln++?"
 # Wrap up
 unset brew_prefix
 export PATH
+
+# --------------------------------------------------------------------
+# Source additional files
+# --------------------------------------------------------------------
+if [[ -n "${HOME}/.keys" ]]; then
+    source "${HOME}/.keys"
+fi
