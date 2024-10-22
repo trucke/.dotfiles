@@ -140,6 +140,7 @@ alias aiders="conda activate aider && aider --sonnet --env-file ${HOME}/developm
 alias localip="ip address | grep -o \"inet 192.*/\" | awk '{ print \$2 }' | tr / ' ' | xargs"
 alias dev="cd ${HOME}/development/"
 alias gll='git log --graph --all --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad)" --date=relative -n 20'
+alias glr='git lr'
 
 alias lt="eza --tree --level=2 --icons --git"
 alias llt="eza --tree --level=2 --long --icons --git"

@@ -17,3 +17,8 @@
 [push]
     default = current
 
+[alias]
+    l = "!. ~/.config/git/helpers && pretty_git_log"
+    la = "!git l --all"
+    lr = "!git l -30"
+    lra = "!git lr --all"
