@@ -25,6 +25,7 @@ return {
         { '<leader>sk', require('telescope.builtin').keymaps,     desc = 'Search Keymaps' },
         { '<leader>sf', require('telescope.builtin').find_files,  desc = 'Search Files' },
         { '<leader>sg', require('telescope.builtin').git_files,   desc = 'Search Git files' },
+        { '<leader>ss', require('telescope.builtin').live_grep,   desc = 'Search String' },
         { '<leader>sd', require('telescope.builtin').diagnostics, desc = 'Search Diagnostics' },
         { '<leader>sr', require('telescope.builtin').resume,      desc = 'Search Resume' },
         { '<leader>su', '<cmd>Telescope undo<cr>',                desc = 'Search undo tree' },

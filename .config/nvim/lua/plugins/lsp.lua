@@ -66,5 +66,7 @@ return {
                 end,
             },
         })
+
+        vim.keymap.set("n", "<leader>lr", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
     end,
 }
