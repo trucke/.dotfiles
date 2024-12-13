@@ -6,12 +6,40 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
+    keys = {
+        { '<leader>of',
+            function()
+                return require('obsidian').util.gf_passthrough()
+            end,
+        },
+        {
+            '<leader>od',
+            function()
+                return require('obsidian').util.toggle_checkbox()
+            end,
+            desc = 'Obsidian - toggle checkbox'
+        },
+        {
+            '<CR>',
+            function()
+                return require('obsidian').util.smart_action()
+            end,
+            desc = 'Obsidian - Smart Action (either follow link or toggle checkbox)'
+        },
+        { '<leader>on',  '<cmd>ObsidianNew<CR>',             desc = 'Obsidian - create new note' },
+        { '<leader>ont', '<cmd>ObsidianNewFromTemplate<CR>', desc = 'Obsidian - create new note from template' },
+        { '<leader>os',  '<cmd>ObsidianSearch<CR>',          desc = 'Obsidian - search vault' },
+        { '<leader>ot',  '<cmd>ObsidianTemplate<CR>',        desc = 'Obsidian - insert template' },
+        { '<leader>of',  '<cmd>ObsidianFollowLink<CR>',      desc = 'Obsidian - follow link including external links' },
+        { '<leader>ow',  '<cmd>ZenMode | Twilight<CR>',      desc = 'Toggle ZenMode+Twilight' },
+        { '<leader>op',  '<cmd>TogglePencil<CR>',            desc = 'Toggle pencil mode' },
+    },
     opts = {
         ui = { enable = false },
         workspaces = {
             {
-                name = 'Mimir',
-                path = '~/obsidian/Mimir',
+                name = 'mimirV2',
+                path = '~/obsidian/mimirV2',
             },
         },
         notes_subdir = '0-Inbox',
@@ -19,21 +47,7 @@ return {
             nvim_cmp = true,
             min_chars = 2,
         },
-        mappings = {
-            ['<leader>of'] = {
-                action = function() return require('obsidian').util.gf_passthrough() end,
-                opts = { noremap = false, expr = true, buffer = true },
-            },
-            ['<leader>od'] = {
-                action = function() return require('obsidian').util.toggle_checkbox() end,
-                opts = { buffer = true },
-            },
-            ['<leader>on'] = { action = "<cmd>ObsidianNew<CR>", opts = { buffer = true } },
-            ['<leader>ont'] = { action = "<cmd>ObsidianNewFromTemplate<CR>", opts = { buffer = true } },
-            ['<leader>os'] = { action = "<cmd>ObsidianSearch<CR>", opts = { buffer = true } },
-            ['<leader>ow'] = { action = "<cmd>ZenMode | Twilight<CR>", opts = { buffer = true } },
-            ['<leader>op'] = { action = "<cmd>TogglePencil<CR>", opts = { buffer = true } },
-        },
+        mappings = {},
         new_notes_location = 'notes_subdir',
         note_id_func = function(title)
             assert(title ~= nil, 'No title given')
@@ -46,12 +60,22 @@ return {
                 note:add_alias(note.title)
             end
 
-            local out = { id = note.id, aliases = note.aliases, tags = note.tags, area = '', project = '' }
+            local out = { id = note.id, aliases = note.aliases, tags = note.tags, }
 
             if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
                 for k, v in pairs(note.metadata) do out[k] = v end
             end
             return out
+        end,
+        -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
+        -- URL it will be ignored but you can customize this behavior here.
+        ---@param url string
+        follow_url_func = function(url)
+            -- Open the URL in the default web browser.
+            vim.fn.jobstart({ "open", url }) -- Mac OS
+            -- vim.fn.jobstart({"xdg-open", url})  -- linux
+            -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+            -- vim.ui.open(url) -- need Neovim 0.10.0+
         end,
         templates = { folder = 'Templates' },
         sort_by = 'path',
