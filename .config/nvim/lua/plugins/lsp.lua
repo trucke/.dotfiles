@@ -3,6 +3,7 @@ local servers = {
     bashls = {},
     gopls = {},
     ts_ls = {},
+    denols = {},
     tailwindcss = {},
     lexical = {},
     svelte = {},
