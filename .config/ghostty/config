@@ -20,6 +20,8 @@ quit-after-last-window-closed = true
 macos-titlebar-style = hidden
 macos-option-as-alt = true
 
+keybind = super+d=unbind
+keybind = super+t=unbind
 keybind = global:unconsumed:ctrl+shift+k=scroll_page_up
 keybind = global:unconsumed:ctrl+shift+j=scroll_page_down
 # keybind = global:unconsumed:ctrl+shift+u=increase_font_size
