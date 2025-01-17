@@ -27,7 +27,6 @@ brew "stow"
 brew "tailwindcss"
 brew "tmux"
 brew "wget"
-brew "yazi"
 
 cask "balenaetcher"
 cask "brave-browser"
