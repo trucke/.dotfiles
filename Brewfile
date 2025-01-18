@@ -4,7 +4,7 @@ tap "oven-sh/bun"
 tap "supabase/tap"
 
 # set arguments for all 'brew install --cask' commands
-cask_args appdir: "~/Applications", require_sha: true
+cask_args appdir: "~/Applications", require_sha: false
 
 brew "bash"
 brew "bat"
@@ -41,7 +41,6 @@ cask "proton-drive"
 cask "proton-pass"
 cask "raycast"
 cask "rectangle-pro"
-cask "termius"
 cask "yubico-yubikey-manager"
 cask "zen-browser"
 

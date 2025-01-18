@@ -1,8 +1,3 @@
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # If you're using macOS, you'll want this enabled
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 # --------------------------------------------------------------------
 # Environment variables
 # --------------------------------------------------------------------
@@ -121,6 +116,10 @@ eval "$(starship init zsh)"
 eval "$(fnm env)"
 eval "$(conda "shell.$(basename "${SHELL}")" hook)"
 eval "$(fzf --zsh)"
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # If you're using macOS, you'll want this enabled
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # --------------------------------------------------------------------
 # Custom keybindings
@@ -167,7 +166,11 @@ function prepend-path() {
 }
 
 type getconf > /dev/null 2>&1 && PATH=$($(command -v getconf) PATH)
-brew_prefix=$(/usr/local/bin/brew --prefix)
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+    brew_prefix=$(/opt/homebrew/bin/brew --prefix)
+else
+    brew_prefix=$(/usr/local/bin/brew --prefix)
+fi
 # prepend new items to path (if directory exists)
 prepend-path "/bin"
 prepend-path "/usr/bin"
@@ -192,6 +195,6 @@ export PATH
 # --------------------------------------------------------------------
 # Source additional files
 # --------------------------------------------------------------------
-if [[ -n "${HOME}/.keys" ]]; then
+if [[ -f "${HOME}/.keys" ]]; then
     source "${HOME}/.keys"
 fi

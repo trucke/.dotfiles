@@ -3,13 +3,34 @@
 mkdir "${HOME}/.config"
 
 pushd "${HOME}/.dotfiles"
-brew bundle --file "./Brewfile" --no-lock
+
+bash "./macos/privacy.sh"
+bash "./macos/settings.sh"
+
+if [[ "$(uname -p)" == "arm" && "$(uname)" == "Darwin" ]]; then
+    # Rosetta 2 is needed for some of the applications installed later on
+    sudo softwareupdate --install-rosetta --agree-to-license
+    /opt/homebrew/bin/brew bundle --file "./Brewfile" --no-lock
+else
+    /usr/local/bin/brew bundle --file "./Brewfile" --no-lock
+fi
+
 stow --restow --target="${HOME}/.config" .config
 stow --restow --target="${HOME}/.local" .local
+
+if [[ -f "${HOME}/.zshrc" ]]; then
+    rm "${HOME}/.zshrc"
+fi
 stow --restow zsh
-bash "./macos/setup.sh"
+
+exec zsh
+
 popd
 
-mkir -p "${HOME}/development/projects"
-mkir -p "${HOME}/development/tools"
+mkdir -p "${HOME}/development/projects"
+mkdir -p "${HOME}/development/tools"
+
 git clone https://github.com/tmux-plugins/tpm "${HOME}/.local/share/tmux/plugins/tpm"
+bash "${HOME}/.local/share/tmux/plugins/tpm/bin/install_plugins"
+# setup fnm - node needed for neovim
+fnm install --lts
