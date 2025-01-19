@@ -98,6 +98,10 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+if [[ ! -f "${HISTFILE}" ]]; then
+    mkdir -p $(dirname "${HISTFILE}") && touch "${HISTFILE}"
+    chmod 644 "${HISTFILE}"
+fi
 
 # --------------------------------------------------------------------
 # Completion styling
