@@ -17,13 +17,8 @@ fi
 
 stow --restow --target="${HOME}/.config" .config
 stow --restow --target="${HOME}/.local" .local
-
-if [[ -f "${HOME}/.zshrc" ]]; then
-    rm "${HOME}/.zshrc"
-fi
 stow --restow zsh
-
-exec zsh
+source "${HOME}/.zshrc"
 
 popd
 
@@ -34,3 +29,4 @@ git clone https://github.com/tmux-plugins/tpm "${HOME}/.local/share/tmux/plugins
 bash "${HOME}/.local/share/tmux/plugins/tpm/bin/install_plugins"
 # setup fnm - node needed for neovim
 fnm install --lts
+source "${HOME}/.zshrc"
