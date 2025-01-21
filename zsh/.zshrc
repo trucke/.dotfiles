@@ -34,7 +34,7 @@ export MIX_HOME="$XDG_DATA_HOME/mix"
 export HEX_HOME="$XDG_DATA_HOME/hex"
 export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
 
-export BAT_THEME="Catppuccin Mocha"
+export BAT_THEME="gruvbox-dark"
 
 export EZA_TREE_IGNORE=".git|node_modules"
 export EZA_ICONS_AUTO=1
