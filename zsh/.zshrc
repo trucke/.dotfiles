@@ -135,6 +135,8 @@ bindkey -s ^f "tmux-sessionizer\n"
 # --------------------------------------------------------------------
 alias dot="cd ${HOME}/.dotfiles"
 alias dev="cd ${HOME}/development"
+alias docs="cd ${HOME}/Documents"
+
 alias t="tmux"
 alias c="conda"
 alias f="fzf"
@@ -189,6 +191,7 @@ prepend-path "/sbin"
 prepend-path "/usr/sbin"
 prepend-path "${HOME}/.local/scripts"
 prepend-path "/usr/local/opt/postgresql@15/bin"
+prepend-path "${GHOSTTY_BIN_DIR}"
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
 PATH=$(echo -n "${PATH}" | awk -v RS=: '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}')
