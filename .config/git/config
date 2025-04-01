@@ -8,14 +8,36 @@
 [core]
     editor = nvim
 
+[column]
+    ui = auto
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+
 [pull]
     rebase = true
 
 [rebase]
     autoStash = true
+    updateRefs = true
+    autoSquash = true
 
 [push]
     default = current
+    followTags = true
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 
 [alias]
     l = "!. ~/.config/git/helpers && pretty_git_log"
