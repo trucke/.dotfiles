@@ -3,8 +3,8 @@ return {
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
-        ensure_installed = { 'lua', 'luadoc', 'vim', 'vimdoc', 'bash', 'go', 'diff',
-            'html', 'javascript', 'markdown', 'markdown_inline', "elixir", "heex" },
+        ensure_installed = { 'bash', 'diff', 'html', 'json', 'lua', 'luadoc', 'markdown', 'markdown_inline',
+            'query', 'toml', 'vim', 'vimdoc', 'yaml' },
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },
