@@ -48,19 +48,26 @@ return {
                         vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                     end
 
-                    map('<leader>f', vim.lsp.buf.format, '[F]ormat the current buffer')
-                    map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-                    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-                    map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-                    map('gtd', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype [D]efinition')
-                    map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
                     map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
                     map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+                    map('<leader>f', vim.lsp.buf.format, '[F]ormat the current buffer')
                     map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+                    map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                    map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+                    map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+                    map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+                    map('grt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
 
                     map('<leader>th', function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
                     end, '[T]oggle Inlay [H]ints')
+
+                    -- -- enable builtin auto-completion
+                    -- local client = vim.lsp.get_client_by_id(event.data.client_id)
+                    -- if client ~= nil and client:supports_method('textDocument/completion') then
+                    --     vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+                    -- end
                 end,
             })
 
