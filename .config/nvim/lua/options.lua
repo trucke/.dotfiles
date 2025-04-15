@@ -1,45 +1,53 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+-- vim.g.maplocalleader = '\\'
 
 vim.g.have_nerd_font = true
-vim.opt.showmode = false
-vim.opt.undofile = true
-vim.opt.undodir = os.getenv('HOME') .. '/.local/share/nvim'
-vim.opt.backup = false
-vim.opt.swapfile = false
-vim.opt.inccommand = 'split'
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.scrolloff = 10
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.g.trouble_lualine = true
+-- fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+vim.g.snacks_animate = false
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = true
+vim.schedule(function() vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" end)
+local opt = vim.opt
+-- enable auto save/write
+opt.autowrite = true
+opt.backup = false
+opt.colorcolumn = "110"
+opt.completeopt = "menu,menuone,noselect"
+-- hide * markup for bold and italic, but not markers w/ substitutions
+opt.conceallevel = 2
+opt.confirm = true
+opt.cursorline = true
+opt.expandtab = true
+opt.ignorecase = true
+opt.inccommand = "split"
+opt.isfname:append("@-@")
+opt.jumpoptions = "view"
+opt.laststatus = 3
+opt.linebreak = true
+opt.list = false
+opt.number = true
+opt.relativenumber = true
+opt.scrolloff = 10
+opt.shiftwidth = 4
+opt.shortmess:append({ W = true, I = true, C = true })
+opt.showmode = false
+opt.sidescrolloff = 8
+opt.signcolumn = "yes"
+opt.smartcase = true
+opt.smartindent = true
+opt.smoothscroll = true
+opt.softtabstop = 4
+opt.splitbelow = true
+opt.splitkeep = "screen"
+opt.splitright = true
+opt.swapfile = false
+opt.tabstop = 4
+opt.termguicolors = true
+opt.timeoutlen = 300
+opt.undodir = os.getenv("HOME") .. "/.local/share/nvim"
+opt.undofile = true
+opt.updatetime = 50
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.signcolumn = 'yes'
-
-vim.opt.updatetime = 50
-vim.opt.timeoutlen = 300
-
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
-vim.opt.completeopt = 'menu,menuone,noselect'
-vim.opt.isfname:append('@-@')
-
-vim.opt.colorcolumn = '110'
--- vim.o.termguicolors = true
-
-vim.opt.laststatus = 3
-
-vim.opt.cursorline = true
--- vim.opt.confirm = true
+-- vim: ts=2 sts=2 sw=2 et
